@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pergunta 2</title>
+    <link rel="stylesheet" href="PL.css">
+</head>
+<body>
+    <div class="container">
+        <div id="timer-display">Tempo: <span id="segundos">10</span>s</div>
+        <h1>Como fazer um pitch no Rocket League</h1>
+        <button onclick="funcao(1)">Toca na bola duas vezes do ar</button>
+        <button onclick="funcao(2)">Voar e levar a bola até o gol</button>
+        <button onclick="funcao(3)">Prense a bola na parede para chutes rapidos</button>
+        <button onclick="funcao(4)">Afastar a bola da zona de perigo a partir da parede</button>
+    </div>
+
+    <script>
+        var pontos = Number(sessionStorage.getItem("varpontos")) || 0;
+        var tempo = 10;
+        var display = document.getElementById("segundos");
+
+        var cronometro = setInterval(function() {
+            tempo--;
+            display.innerText = tempo;
+            if (tempo <= 3) document.getElementById("timer-display").classList.add("timer-critico");
+            if (tempo <= 0) {
+                clearInterval(cronometro);
+                alert("O tempo acabou!");
+                proximaPagina(false);
+            }
+        }, 1000);
+
+        function funcao(num) {
+            clearInterval(cronometro);
+            if(num == 3) { alert("acertou"); proximaPagina(true); }
+            else { alert("errou"); proximaPagina(false); }
+        }
+
+        function proximaPagina(acertou) {
+            if (acertou) pontos += 1;
+            sessionStorage.setItem("varpontos", pontos);
+            window.location.href = "pergunta3.html";
+        }
+    </script>
+</body>
+</html>

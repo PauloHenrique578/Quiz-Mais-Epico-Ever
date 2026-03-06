@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pergunta 1 - Quiz Épico</title>
+    <link rel="stylesheet" href="PL.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="timer-display">Tempo: <span id="segundos">10</span>s</div>
+        
+        <h1>Qual o melhor jogo estilo Souls Like?</h1>
+        
+        <button onclick="funcao(1)">Elden Ring</button>
+        <button onclick="funcao(2)">BloodBorne</button>
+        <button onclick="funcao(3)">Lies of P</button>
+        <button onclick="funcao(4)">Dark Souls 3</button>
+    </div>
+
+    <script>
+        // Pega os pontos atuais
+        var pontos = Number(sessionStorage.getItem("varpontos")) || 0;
+        var tempo = 10; // Segundos para responder
+        var display = document.getElementById("segundos");
+
+        // Função do Cronômetro
+        var cronometro = setInterval(function() {
+            tempo--;
+            display.innerText = tempo;
+
+            if (tempo <= 3) {
+                document.getElementById("timer-display").classList.add("timer-critico");
+            }
+
+            if (tempo <= 0) {
+                clearInterval(cronometro);
+                alert("O tempo acabou!");
+                proximaPagina(false); // Conta como erro
+            }
+        }, 1000);
+
+        function funcao(num) {
+            clearInterval(cronometro); // Para o tempo se ele clicar
+            if (num == 1) {
+                alert("Acertou! Elden Ring é brabo.");
+                proximaPagina(true);
+            } else {
+                alert("Errou!");
+                proximaPagina(false);
+            }
+        }
+
+        function proximaPagina(acertou) {
+            if (acertou) {
+                pontos += 1;
+            }
+            sessionStorage.setItem("varpontos", pontos);
+            window.location.href = "pergunta2.html"; // Mude aqui para a próxima
+        }
+    </script>
+</body>
+</html>

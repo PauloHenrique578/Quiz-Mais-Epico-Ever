@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Épico - Início</title>
+    <link rel="stylesheet" href="PL.css">
+    <script>
+        function iniciar(){
+            sessionStorage.setItem("varpontos", 0);
+            window.location.href = "pergunta1.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>QUIZ ÉPICO</h1>
+        <p style="margin-bottom: 20px; color: #00f2ff;">
+            Prepare-se para o desafio. <br> Clique no botão para começar.
+        </p>
+        <button onclick="iniciar()">COMEÇAR</button>
+    </div>
+</body>
+</html>

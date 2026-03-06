@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pergunta 6</title>
+    <link rel="stylesheet" href="PL.css">
+</head>
+<body>
+    <div class="container">
+        <div id="timer-display">Tempo: <span id="segundos">10</span>s</div>
+        <h1>Melhor Jogo MetroidVania</h1>
+        <button onclick="funcao(1)">ORI</button>
+        <button onclick="funcao(2)">Hollow Knight</button>
+        <button onclick="funcao(3)">Castlevania Symphony of the Night</button>
+        <button onclick="funcao(4)">Metroid</button>
+    </div>
+
+    <script>
+        var pontos = Number(sessionStorage.getItem("varpontos")) || 0;
+        var tempo = 10;
+        var display = document.getElementById("segundos");
+
+        var cronometro = setInterval(function() {
+            tempo--;
+            display.innerText = tempo;
+            if (tempo <= 3) document.getElementById("timer-display").classList.add("timer-critico");
+            if (tempo <= 0) {
+                clearInterval(cronometro);
+                alert("O tempo acabou!");
+                proximaPagina(false);
+            }
+        }, 1000);
+
+        function funcao(num) {
+            clearInterval(cronometro);
+            if(num == 3) { alert("acertou"); proximaPagina(true); }
+            else { alert("errou"); proximaPagina(false); }
+        }
+
+        function proximaPagina(acertou) {
+            if (acertou) pontos += 1;
+            sessionStorage.setItem("varpontos", pontos);
+            window.location.href = "pergunta7.html";
+        }
+    </script>
+</body>
+</html>
